@@ -10,7 +10,7 @@ protocol joueurProtocol{
   init(nomJoueur : String)
 
   // Place une pièce a la case indiquée
-  func placerPiece(case : caseProtocol)
+  func placerPiece(pos : caseProtocol)
 
   // Choisi une pièce parmis celle.s restante.s/disponible.s
   func choisirPiece(piece : pieceProtocol)

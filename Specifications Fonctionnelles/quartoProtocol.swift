@@ -6,8 +6,8 @@ protocol quartoProtocol{
   // Variable contenant le joueur n°2
   var j2 : joueurProtocol {get}
 
-  // Variable contenant le joueur actuel
-  var currentPlayer : joueurProtocol {get set}
+  // Variable contenant le joueur actuel ou aucun si il n'a pas encore été choisi en début de partie
+  var currentPlayer : joueurProtocol? {get set}
 
   // Collection contenant toutes les caseProtocol du jeu
   var collectionCase : Collection
@@ -20,7 +20,7 @@ protocol quartoProtocol{
   var estModeDifficile : Bool {get set}
 
   // Fonction qui modifie la variable currentPlayer pour désigner le 
-  mutating func tirageSort(joueur1 : joueurProtocol, joueur2 : joueurProtocol)
+  mutating func tirageSort(joueur1 : joueurProtocol, joueur2 : joueurProtocol) 
   
   // Crée l'instance quartoProtocol
   init()
@@ -53,4 +53,6 @@ protocol quartoProtocol{
   // Verifie s'il y a un quarto de forme carré
   func verifCarre() -> Bool
 
+  // Passe au joueur suivant
+  func next() -> joueurProtocol
 }
