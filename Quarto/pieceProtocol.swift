@@ -1,4 +1,5 @@
 protocol pieceProtocol{
+  associatedtype piece : pieceProtocol
 
   // pièce claire ou non (sombre)
   var estClair : Bool {get}
@@ -23,6 +24,6 @@ protocol pieceProtocol{
   // compareTo : pieceProtocol x pieceProtocol -> Collection
   // Fonction pour comparer les caractéristiques d'une pièce avec self
   // Return : Collection de caractéristiques communes entre les 2 pièces
-  func compareTo(pieceToCompare : pieceProtocol) -> Collection
+  func compareTo(pieceToCompare : piece)
 
 }
