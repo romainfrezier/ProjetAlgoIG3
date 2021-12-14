@@ -1,4 +1,5 @@
 protocol caseProtocol{
+  associatedtype piece : pieceProtocol
   
   // Stocke la position latérale de la case
   var x : Int {get}
@@ -7,7 +8,7 @@ protocol caseProtocol{
   var y : Int {get}
 
   // Contient la piece présente dans la case s'il y en a une, sinon vaut nil
-  var piece : pieceProtocol? {get set}
+  var piece : piece? {get set}
   
   // init : Int x Int -> caseProtocol
   // Crée l'instance de caseProtocol en assignant ses coordonnées aux coordonnées passés en paramètre et en initialisant la variable piece a nil 
