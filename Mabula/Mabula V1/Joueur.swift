@@ -1,5 +1,0 @@
-// String = codage
-enum Joueur : String {
-    case blanc = "blanc"
-    case noir = "noir"
-}

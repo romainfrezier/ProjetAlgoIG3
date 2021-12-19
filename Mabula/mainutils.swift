@@ -48,7 +48,7 @@ func choixCoordonneesDeplacement() -> [Int] {
             return [xDebut, yDebut, nbCasesDeplacement]
         }
     }
-    // l’utilisateur n’a pas saisi de bonnes valeurs 
+    // l’utilisateur n’a pas saisi de bonnes valeurs
     // il a saisi autre chose qu’uniquement des entiers
     return choixCoordonneesDeplacement()
 }
@@ -77,7 +77,7 @@ func afficherPlateau(jeu: Mabula) {
     print("                  y")
     for i in 0..<8 {
         for j in 0..<8 {
-            let contenuCase = jeu.recupererContenuCase(x: i, y: j)
+            let contenuCase = jeu.recupererContenuCase(x: j, y: i)
             print("|", terminator: "")
             if contenuCase.estNoir {
                 print("x", terminator: "")
@@ -86,7 +86,8 @@ func afficherPlateau(jeu: Mabula) {
             } else if contenuCase.estInoccupe {
                 print(" ", terminator: "")
             }
-            print("|", i)
+            //print()
+            print("|", terminator: "")
         }
         print()
     }
