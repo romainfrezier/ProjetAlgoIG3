@@ -2,9 +2,9 @@
 let modeCalcul = choixModeCalcul()
 
 // si l'implémentation de TMabula ne s'appelle pas Mabula, changer cette ligne
-var jeu = Mabula(modeCalcul: modeCalcul)
+var jeu = Mabula(estMethodeCalculPlusGrandGroupe: modeCalcul)
 
-let deplacementPossible : Bool
+var deplacementPossible : Bool
 
 var xDebut = 0
 var yDebut = 0
@@ -28,7 +28,9 @@ while !jeu.partieFinie() {
 
     // on récupère le joueur actuel
     // si c'est nil on ne fait rien car la partie est finie
-    if jeu.joueurActuel = jeu.prochainJoueur() {}
+    if let joueur = jeu.prochainJoueur(){
+      jeu.joueurActuel = joueur
+    }
 }
 
 let scores = jeu.calculScore()

@@ -1,5 +1,7 @@
 # Remarques 
 
+## Anciens commentaires (commentaires sur la période entre spécif et dev)
+
 - Méthodes de calcul est une enum alors que ça pourrait juste être un bool puisque c'est une méthode ou une autre, on pourrait mettre un booléen estModeCalculClassique ou 2 fonctions
 
 - Contenu case : 1 bool inutile, soit utiliser estBlanc soit estNoir
@@ -26,7 +28,7 @@
 
 - l'enum joueur n'est pas nécessaire
 
-## Nouveaux commentaires
+## Nouveaux commentaires (commentaires sur la période de développement)
 
 - pas d'init dans TContenuCase avec param x,y
 
@@ -41,3 +43,11 @@
 - recupererGroupesBilles(joueur: Joueur) -> [ContenuCaseCollection] pourquoi un tableau de collection quand on a besoin que d'un tableau d'int
 
 - (vérifier s'il n'y a pas de blocage par rapport aux 2 implémentations de contenucasecollection)
+
+- redondance de code a cause des deux booléens estNoir et estBlanc
+
+- renvoie un itératorProtocol pour etre générique et ne pas forcer un nom de type
+
+- getContenuCase doit renvoyer ContenuCase? et pas ContenuCase
+
+- affichage non commode pour l'utilisateur, et affichage a l'envers (inversion x,y)
