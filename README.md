@@ -1,4 +1,4 @@
-# Projet Algo Frezier Italiano
+# Projet Algo - Frezier Romain & Italiano Lorenzo
 
 ### Projet d'algo premier semestre d'IG3.
 
