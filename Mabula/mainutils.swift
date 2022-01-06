@@ -74,22 +74,30 @@ func choixCoordonneesDeplacement() -> [Int] {
 // x: 0 1 2 3 4 5 6 7
 // si le type concret implémentant TMabula ne s'appelle pas Mabula, il faut changer
 func afficherPlateau(jeu: Mabula) {
-    print("                  y")
+    print("                   y")
     for i in 0..<8 {
         for j in 0..<8 {
             let contenuCase = jeu.recupererContenuCase(x: j, y: i)
-            print("|", terminator: "")
-            if contenuCase.estNoir {
-                print("x", terminator: "")
-            } else if contenuCase.estBlanc {
-                print("o", terminator: "")
-            } else if contenuCase.estInoccupe {
-                print(" ", terminator: "")
+            if(j==0){
+              print(" |", terminator: "")
             }
-            //print()
-            print("|", terminator: "")
+            else{
+              print("|", terminator: "")
+            }
+            
+            if let temp = contenuCase{
+              if temp.estNoir {
+                print("x", terminator: "")
+              } else if temp.estBlanc {
+                print("o", terminator: "")
+              } else if temp.estInoccupe {
+                print(" ", terminator: "")
+              }
+            }
+            //print()   
         }
-        print()
+        print("| ", terminator: "")
+        print(i)
     }
-    print("\n 0 1 2 3 4 5 6 7 x")
+    print("x 0 1 2 3 4 5 6 7")
 }

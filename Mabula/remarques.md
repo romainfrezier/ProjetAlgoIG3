@@ -51,3 +51,5 @@
 - getContenuCase doit renvoyer ContenuCase? et pas ContenuCase
 
 - affichage non commode pour l'utilisateur, et affichage a l'envers (inversion x,y)
+
+- Ajout au main de ne pouvoir jouer que les billes qui nous appartiennent
