@@ -157,7 +157,7 @@ class Mabula {
             a = placerBillesRecur(array : &tab, index : 0, serie : 0, caseSerie : -1, nbFirstAvailable : 12, nbSecondAvailable : 12)
         }
         while(!a)
-        print(tab)
+        //print(tab)
 
         var cptFirst : Int = 0
         var cptSecond : Int = 0
@@ -189,11 +189,16 @@ class Mabula {
         }
         if(val==0){
             // alors on affecte le blanc
-            self.grid.getContenuCase(x:x,y:y)!.estBlanc = true
+            if let temp = self.grid.getContenuCase(x:x,y:y){
+              temp.estBlanc = true
+            }
+            
         }
         else{
             // alors on affecte le noir
-            self.grid.getContenuCase(x:x,y:y)!.estNoir = true
+            if let temp = self.grid.getContenuCase(x:x,y:y){
+              temp.estNoir = true
+            }
         }
     }
 
@@ -232,8 +237,14 @@ class Mabula {
 
     // récupère le contenu de la case à la position (x, y) sur le plateau
     // ContenuCase est le type concret implémentant TContenuCase (cf. associatedtype)
-    func recupererContenuCase(x: Int, y: Int) -> ContenuCase{
-        return self.grid.getContenuCase(x: x, y: y)!
+    //Erreur de conception ici recupererContenuCase doit renvoyer ContenuCase?
+    func recupererContenuCase(x: Int, y: Int) -> ContenuCase?{
+      if let temp = self.grid.getContenuCase(x: x, y: y){
+        return temp
+      }
+      else{
+        return nil
+      }
     }
 
     // La fonction renvoie quel joueur jouera au prochain tour (en alternance, sauf exceptions)
@@ -278,7 +289,7 @@ class Mabula {
     func peutJouer(joueur: Joueur) -> Bool{
         var possedeBilleSurBord : Bool = false
         var tabContenuCaseJoueur : List = List()
-        var tempContenuCase : ContenuCase
+        var tempContenuCase : ContenuCase?
         // Si le joueur n'a plus de billes sur le bord, renvoie directement false
         if(joueur == Joueur.blanc){
             var cptFirst : Int = 0
@@ -286,37 +297,41 @@ class Mabula {
             var cptThird : Int = 0
             var cptFourth : Int = 0
             for i in 0...23{
-                if(i<=5){
-                    cptFirst += 1
-                    tempContenuCase = self.grid.getContenuCase(x:cptFirst,y:0)!
+              if(i<=5){
+                  cptFirst += 1
+                  if let tempContenuCase = self.grid.getContenuCase(x:cptFirst,y:0){
                     if(tempContenuCase.estBlanc){
-                        possedeBilleSurBord = true
-                        tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
+                      possedeBilleSurBord = true
+                      tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
                     }
+                  }        
                 }
                 else if(i>5 && i <= 11){
                     cptSecond += 1
-                    tempContenuCase = self.grid.getContenuCase(x:7,y:cptSecond)!
-                    if(tempContenuCase.estBlanc){
+                    if let tempContenuCase = self.grid.getContenuCase(x:7,y:cptSecond){
+                      if(tempContenuCase.estBlanc){
                         possedeBilleSurBord = true
                         tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
                     }
+                  }  
                 }
                 else if(i>11 && i<=17){
-                    cptThird += 1
-                    tempContenuCase = self.grid.getContenuCase(x:cptThird,y:7)!
+                  cptThird += 1
+                  if let tempContenuCase = self.grid.getContenuCase(x:cptThird,y:7){
                     if(tempContenuCase.estBlanc){
-                        possedeBilleSurBord = true
-                        tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
+                      possedeBilleSurBord = true
+                      tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
                     }
+                  }  
                 }
                 else{
                     cptFourth += 1
-                    tempContenuCase = self.grid.getContenuCase(x:0,y:cptFourth)!
-                    if(tempContenuCase.estBlanc){
+                    if let tempContenuCase = self.grid.getContenuCase(x:0,y:cptFourth){
+                      if(tempContenuCase.estBlanc){
                         possedeBilleSurBord = true
                         tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
-                    }
+                      }
+                    }  
                 }
             }
         }
@@ -328,35 +343,40 @@ class Mabula {
             for i in 0...23{
                 if(i<=5){
                     cptFirst += 1
-                    tempContenuCase = self.grid.getContenuCase(x:cptFirst,y:0)!
-                    if(tempContenuCase.estNoir){
+                    if let tempContenuCase = self.grid.getContenuCase(x:cptFirst,y:0){
+                      if(tempContenuCase.estNoir){
                         possedeBilleSurBord = true
                         tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
+                      }
                     }
                 }
                 else if(i>5 && i <= 11){
                     cptSecond += 1
-                    tempContenuCase = self.grid.getContenuCase(x:7,y:cptSecond)!
-                    if(tempContenuCase.estNoir){
+                    if let tempContenuCase = self.grid.getContenuCase(x:7,y:cptSecond){
+                      if(tempContenuCase.estNoir){
                         possedeBilleSurBord = true
                         tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
+                      }
                     }
+                    
                 }
                 else if(i>11 && i<=17){
                     cptThird += 1
-                    tempContenuCase = self.grid.getContenuCase(x:cptThird,y:7)!
-                    if(tempContenuCase.estNoir){
+                    if let tempContenuCase = self.grid.getContenuCase(x:cptThird,y:7){
+                      if(tempContenuCase.estNoir){
                         possedeBilleSurBord = true
                         tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
+                      }
                     }
                 }
                 else{
                     cptFourth += 1
-                    tempContenuCase = self.grid.getContenuCase(x:0,y:cptFourth)!
-                    if(tempContenuCase.estNoir){
+                    if let tempContenuCase = self.grid.getContenuCase(x:0,y:cptFourth){
+                      if(tempContenuCase.estNoir){
                         possedeBilleSurBord = true
                         tabContenuCaseJoueur.ajouterContenuCase(contenuCase: tempContenuCase)
-                    }
+                      }
+                    }    
                 }
             }
         }
@@ -367,11 +387,14 @@ class Mabula {
         var it = tabContenuCaseJoueur.makeIterator1D()
         repeat{
             // condition d'arret : tempContenuCase == nil
-            tempContenuCase = it.next()!
-            if(tempContenuCase != nil){
-                if(deplacementPossible(xDebut: tempContenuCase.x,yDebut: tempContenuCase.y, nbCasesDeplacement:1)){
-                    return true
-                }
+            if let temp = it.next(){
+              if(deplacementPossible(xDebut: temp.x,yDebut: temp.y, nbCasesDeplacement:1)){
+                return true
+              }
+              tempContenuCase = temp
+            }
+            else{
+              tempContenuCase = nil
             }
         }
         while(tempContenuCase != nil)
@@ -455,7 +478,7 @@ class Mabula {
 
     //CurrentItem = 0 si blanc, 1 si noir
     private func deplacerBilleRecur(xDebut: Int, yDebut: Int, nbCasesDeplacement: Int, direction : String = "init", currentItem : Int?){
-        print(xDebut, yDebut, nbCasesDeplacement,direction,currentItem)
+        //print(xDebut, yDebut, nbCasesDeplacement,direction,currentItem)
         var directionRecur : String = ""
         if(direction == "init"){
             if(xDebut == 0){
@@ -467,14 +490,14 @@ class Mabula {
             else if(yDebut == 0){
                 directionRecur = "bas"
             }
-            else{
+            else if(yDebut == 7){
                 directionRecur = "haut"
             }
         }
         else{
             directionRecur = direction
         }
-        print(directionRecur)
+        //print(directionRecur)
 
         if(nbCasesDeplacement > 0){
             if(directionRecur == "droite"){
@@ -614,7 +637,6 @@ class Mabula {
                     else{
                         temp!.estNoir = true
                     }
-                    return
                 }
                 else{
                     self.grid.getContenuCase(x:xDebut,y:yDebut)!.estInoccupe = true
@@ -642,7 +664,7 @@ class Mabula {
             }
         }
         else{
-          var tmp = self.grid.getContenuCase(x:xDebut,y:yDebut)
+          let tmp = self.grid.getContenuCase(x:xDebut,y:yDebut)
           tmp!.estInoccupe = false
 
           if(currentItem==0){
@@ -669,17 +691,20 @@ class Mabula {
         var couleur : Bool = false
 
         if(joueur == Joueur.blanc){
-            couleur = true
+          couleur = true
         }
 
 
-        for i in 0..<self.grid.count{
-            for j in 0..<self.grid.count{
-                let current = self.grid.getContenuCase(x:j,y:i)
-                if(!(current!.estInoccupe) && current!.estBlanc==couleur && alreadyChecked[i][j] == false){
+        for i in 0...7{
+            for j in 0...7{
+                let current = self.grid.getContenuCase(x:i,y:j)
+                if let current = current{
+                  if(!(current.estInoccupe) && current.estBlanc==couleur && alreadyChecked[i][j] == false){
                     groupes.append(getGroupesAux(alreadyChecked : &alreadyChecked,x:j,y:i,val:couleur, tabReturn : &tabReturn))
                     tabReturn = List()
+                  }
                 }
+                
             }
         }
         return groupes
@@ -703,7 +728,7 @@ class Mabula {
             }
         }
         //y+1 en dessous
-        if(y+1<self.grid.count && alreadyChecked[y+1][x] == false){
+        if(y+1<8 && alreadyChecked[y+1][x] == false){
             alreadyChecked[y+1][x] = true
             if(!(self.grid.getContenuCase(x:x,y:y+1)!.estInoccupe) && self.grid.getContenuCase(x:x, y: y+1)!.estBlanc == val){
                 tabReturn.ajouterContenuCase(contenuCase: self.grid.getContenuCase(x:x,y:y+1)!)
@@ -719,7 +744,7 @@ class Mabula {
             }
         }
         //x+1 a droite
-        if(x+1<self.grid.count && alreadyChecked[y][x+1] == false){
+        if(x+1<8 && alreadyChecked[y][x+1] == false){
             alreadyChecked[y][x+1] = true
             if(!(self.grid.getContenuCase(x:x+1,y:y)!.estInoccupe) && self.grid.getContenuCase(x:x+1,y:y)!.estBlanc == val){
                 tabReturn.ajouterContenuCase(contenuCase: self.grid.getContenuCase(x:x+1,y:y)!)
@@ -772,11 +797,15 @@ class Mabula {
         var scoreBlanc : Int = 1
         let collectionBlanc : [List] = recupererGroupesBilles(joueur: Joueur.blanc)
         var itBlanc = collectionBlanc.makeIterator()
-        var temp : List
+        //var temp : List
         repeat{
-            // condition d'arret : itBlanc.next() == nil
-            temp = itBlanc.next()!
-            scoreBlanc *= temp.count
+          // condition d'arret : itBlanc.next() == nil
+          if let temp = itBlanc.next(){
+            if temp.count != 0{
+              scoreBlanc *= temp.count
+            //itBlanc = itBlanc.next()
+            }  
+          }   
         }
         while (itBlanc.next() != nil)
 
@@ -785,11 +814,15 @@ class Mabula {
         let collectionNoir : [List] = recupererGroupesBilles(joueur: Joueur.noir)
         var itNoir = collectionNoir.makeIterator()
         repeat{
-            // condition d'arret : itBlanc.next() == nil
-            temp = itNoir.next()!
-            scoreNoir *= temp.count
+          // condition d'arret : itBlanc.next() == nil
+          if let temp = itNoir.next(){
+            if temp.count != 0{
+              scoreNoir *= temp.count
+              //itNoir = itNoir.next()
+            }
+          }
         }
-        while (itBlanc.next() != nil)
+        while (itNoir.next() != nil)
 
         // attribution des scores respectifs à chaque joueur
         let score : [Joueur:Int] = [Joueur.blanc : scoreBlanc, Joueur.noir :scoreNoir]
