@@ -46,7 +46,7 @@
 
 - redondance de code a cause des deux booléens estNoir et estBlanc
 
-- renvoie un itératorProtocol pour etre générique et ne pas forcer un nom de type
+- renvoyer un itératorProtocol pour etre générique et ne pas forcer un nom de type
 
 - getContenuCase doit renvoyer ContenuCase? et pas ContenuCase
 
