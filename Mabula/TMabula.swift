@@ -798,31 +798,21 @@ class Mabula {
         let collectionBlanc : [List] = recupererGroupesBilles(joueur: Joueur.blanc)
         var itBlanc = collectionBlanc.makeIterator()
         //var temp : List
-        repeat{
-          // condition d'arret : itBlanc.next() == nil
-          if let temp = itBlanc.next(){
-            if temp.count != 0{
-              scoreBlanc *= temp.count
-            //itBlanc = itBlanc.next()
+        while let next = itBlanc.next(){
+          if next.count != 0{
+              scoreBlanc *= next.count
             }  
-          }   
         }
-        while (itBlanc.next() != nil)
 
         // Calcul du score du joueur noir
         var scoreNoir : Int = 1
         let collectionNoir : [List] = recupererGroupesBilles(joueur: Joueur.noir)
         var itNoir = collectionNoir.makeIterator()
-        repeat{
-          // condition d'arret : itBlanc.next() == nil
-          if let temp = itNoir.next(){
-            if temp.count != 0{
-              scoreNoir *= temp.count
-              //itNoir = itNoir.next()
+        while let next = itNoir.next(){
+          if next.count != 0{
+              scoreNoir *= next.count
             }
-          }
         }
-        while (itNoir.next() != nil)
 
         // attribution des scores respectifs à chaque joueur
         let score : [Joueur:Int] = [Joueur.blanc : scoreBlanc, Joueur.noir :scoreNoir]
