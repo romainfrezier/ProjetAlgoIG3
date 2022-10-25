@@ -3,6 +3,6 @@
 ### Projet d'algo premier semestre d'IG3.
 
 Objectif : 
-Faire les spécifs et le main d'un jeu (Quarto), récuperer les spécifs et le main d'un autre jeu (Mabula) de la part d'un autre binome et en faire le développement
+Faire les spécifications fonctionelles et le programme principale d'un jeu (Quarto), récupérer les spécifications fonctionelles et le programme principale d'un autre jeu (Mabula) de la part d'un autre binôme et le développer.
 
 
